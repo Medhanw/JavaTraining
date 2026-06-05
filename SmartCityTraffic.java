@@ -1,4 +1,4 @@
-package JavaTraining;
+
 
 public class SmartCityTraffic {
     public static void main(String[] args){
