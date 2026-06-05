@@ -1,4 +1,4 @@
-package JavaTraining;
+
 import java.util.Scanner;
 
 public class DiscountEligibility {
