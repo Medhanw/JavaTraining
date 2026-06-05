@@ -1,4 +1,4 @@
-package JavaTraining;
+
 
 public class LoginLock {
    public static void main(String[] args) {
