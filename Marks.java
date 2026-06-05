@@ -1,4 +1,4 @@
-package JavaTraining;
+
 import java.util.Scanner;
 class Marks{
     public static void main(String[] args){
