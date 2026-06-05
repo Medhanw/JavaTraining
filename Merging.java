@@ -1,4 +1,4 @@
-package JavaTraining;
+
 import java.util.Scanner;
 public class Merging {
     public static void mergesort(int[] arr, int p, int r){
