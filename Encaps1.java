@@ -1,4 +1,4 @@
-package JavaTraining;
+
 
 class Student {
     private int rollNo;
