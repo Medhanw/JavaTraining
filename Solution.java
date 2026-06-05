@@ -1,4 +1,4 @@
-package JavaTraining; 
+
 import java.util.*;
 
 class Phone {
