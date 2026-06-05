@@ -1,4 +1,4 @@
-package JavaTraining;
+
 public class Poly1 {
     static int add(int a, int b){
         return a+b;
