@@ -1,4 +1,4 @@
-package JavaTraining;
+
 public class MinMax {
     public static void main(String[] args) {
         int[] arr = { 33, 10, 7, 25, 49, 55, 41, 6 };
