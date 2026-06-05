@@ -1,4 +1,3 @@
-package JavaTraining;
 abstract class Animal {
     int no_of_legs;
     String color;
