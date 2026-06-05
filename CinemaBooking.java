@@ -1,4 +1,4 @@
-package JavaTraining;
+
 import java.util.Scanner;
 public class CinemaBooking {
     public static void main(String[] args){
