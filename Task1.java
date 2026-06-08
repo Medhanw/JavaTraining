@@ -63,10 +63,8 @@ public class Task1 {
 
         double totalProjectTime = Math.max(timeA, Math.max(timeB, timeC));
 
-        System.out.println("Total time required to complete all given task: " + totalProjectTime + "Units of Tiem!!");
+        System.out.println("Total time required to complete all given task: " + totalProjectTime + "Units of Time!!");
     }
-
-
-    }
+}
     
 
