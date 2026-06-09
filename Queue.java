@@ -48,7 +48,7 @@ class QueueOps {
 
 
         static void display() {
-           if (front == null && rear == null) {
+            if (front == null && rear == null) {
                 System.out.println("Queue is empty");
                 return;
             } 
@@ -58,14 +58,8 @@ class QueueOps {
                 temp = temp.next;
             }
         }
-      
-
-    }
+}
 public class Queue {
-
-
-
-
 
     static class Node {
         int data;
