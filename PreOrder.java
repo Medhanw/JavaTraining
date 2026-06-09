@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Queue;
 
 // Assuming Node class is defined as before
 class Node {
@@ -39,6 +40,31 @@ class TreeOps {
             }
         }
     }
+    Node build(Integer[] arr) {
+    if (arr == null || arr.length == 0 || arr[0] == null) return null;
+    
+    Queue<Node> q = new LinkedList<>();
+    Node root = new Node(arr[0]);
+    q.add(root);
+    int i = 1;
+    
+    while (!q.isEmpty() && i < arr.length) {
+        Node current = q.poll();
+        
+        if (i < arr.length && arr[i] != null) {
+            current.left = new Node(arr[i]);
+            q.add(current.left);
+        }
+        i++;
+        
+        if (i < arr.length && arr[i] != null) {
+            current.right = new Node(arr[i]);
+            q.add(current.right);
+        }
+        i++;
+    }
+    return root;
+}
 
     // 3. Fixed Mirror Tree Logic
     boolean isMirror(Node root1, Node root2) {
@@ -59,40 +85,93 @@ class TreeOps {
     }
     int diameter = 0;
     int getdiameter(Node root){
+        if(root == null) return 0;
+        return 1+ height(root.left) +height(root.right);
+    }
+    boolean isEqual(Node root1, Node root2){
+        if(root1 == null && root2 == null) return true;
+        if(root1 == null || root2 == null) return false;
+        if(root1.data != root2.data) return false;
+
+        return root1.data == root2.data && isEqual(root1.left, root2.left)
+        && isEqual(root1.right, root2.right);
+    }
+    void delete(Node root, int key){
+        if(root == null) return;
+        Queue<Node> que = new LinkedList<>();
+        Node keyNode = null;
+        que.add(root);
+        Node curr = null; // Initialize properly
         
+        while(!que.isEmpty()){
+            curr = que.poll(); // Fixed spelling typo from 'cur' to 'curr'
+            if(curr.data == key){
+                keyNode = curr;
+            }
+            // Fixed: changed from root.left/right to curr.left/right
+            if(curr.left != null) que.offer(curr.left); 
+            if(curr.right != null) que.offer(curr.right);
+        }
+        
+        if(keyNode != null){
+            keyNode.data = curr.data; // copy deepest node value to target node
+            delLastNode(root, curr);   // Fixed: passed both root and deepest node
+        }
+    }
+
+    // Fixed delLastNode logic to prevent NullPointerExceptions during traversal
+    void delLastNode(Node root, Node delNode){
+        if (root == null || delNode == null) return;
+        if (root == delNode) {
+            root = null;
+            return;
+        }
+        Queue<Node> que = new LinkedList<>();
+        que.offer(root);
+        while(!que.isEmpty()){
+            Node curr = que.poll();
+            if(curr.left == delNode){
+                curr.left = null;
+                break;
+            } else if (curr.left != null) { // Fixed: check for null before offering
+                que.offer(curr.left);
+            }
+            if(curr.right == delNode){
+                curr.right = null;
+                break;
+            } else if (curr.right != null) { // Fixed: check for null before offering
+                que.offer(curr.right);
+            }
+        }
     }
 }
 
 public class PreOrder {
     public static void main(String[] args) {
-        TreeOps ops = new TreeOps();
+        //TreeOps ops = new TreeOps();
+        //Node root = new Node(1);
+        //root.left = new Node(2);
+        //root.right = new Node(3);
 
-        // Let's manually map out a simple tree:
-        //       1
-        //      / \
-        //     2   3
-        Node root = new Node(1);
-        root.left = new Node(2);
-        root.right = new Node(3);
+        //System.out.print("Recursive Pre-Order: ");
+        //ops.preOrder(root);
+        //System.out.println();
 
-        System.out.print("Recursive Pre-Order: ");
-        ops.preOrder(root);
-        System.out.println();
+        //System.out.print("Iterative Pre-Order: ");
+        //ops.preOrderIterator(root);
+        //System.out.println();
 
-        System.out.print("Iterative Pre-Order: ");
-        ops.preOrderIterator(root);
-        System.out.println();
+        //Node t1 = new Node(1);
+        //t1.left = new Node(2);
 
-        // Test Mirror Functionality
-        // Tree 1:   1         Tree 2:   1
-        //          /                   \
-        //         2                     2
-        Node t1 = new Node(1);
-        t1.left = new Node(2);
+        //Node t2 = new Node(1);
+        //t2.right = new Node(2);
+        TreeOps tree = new TreeOps();
 
-        Node t2 = new Node(1);
-        t2.right = new Node(2);
+       //System.out.println("Are t1 and t2 mirrors? " + ops.isMirror(t1, t2));
+    Node root1 = tree.build(new Integer[]{10, 20, 30, 40, 50, 60, null});
+    Node root2 = tree.build(new Integer[]{10, 20, 30, 40, 50, 60, null});
 
-        System.out.println("Are t1 and t2 mirrors? " + ops.isMirror(t1, t2));
+    //System.err.println(tree.isEqual(root1, root2));
     }
 }
