@@ -56,6 +56,19 @@ public class Graph1 {
     }
 }
 }
+static boolean isNodeExisting(int node) {
+    // A node exists if it falls within the current bounds of our adjacency list
+    return node >= 0 && node < graph.size();
+}
+static boolean isEdgeExisting(int src, int dest) {
+    // Step 1: Ensure both nodes actually exist in the graph first
+    if (!isNodeExisting(src) || !isNodeExisting(dest)) {
+        return false;
+    }
+    
+    // Step 2: Check if 'dest' is inside the neighbor list of 'src'
+    return graph.get(src).contains(dest);
+}
     static void deleteNode(int targetNode, int totalVertices){
         if(targetNode < 0 || targetNode >=graph.size()){
             System.out.println("Node "+targetNode+"does not exist");
@@ -69,6 +82,7 @@ public class Graph1 {
         graph.get(targetNode).clear();
         System.out.println("Node "+targetNode+"and its connections have been successfully deleted.");
     }
+
 }
     public static void main(String[] args) {
         createGraph(6);
